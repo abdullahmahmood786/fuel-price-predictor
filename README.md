@@ -8,17 +8,13 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6-orange)
 ![Status](https://img.shields.io/badge/status-complete-brightgreen)
 
-A machine learning project that builds a full time-series regression pipeline — feature engineering, lag variables, model comparison, and evaluation — on 15 years of Pakistan petrol price data. Achieves high R² accuracy with a tuned Random Forest model.
+A machine learning project that builds a full time-series regression pipeline — feature engineering, lag variables, model comparison, and evaluation — on 15 years of Pakistan petrol price data.
 
 </div>
 
 ---
 
-
-
 ## Install
-
-Install the required libraries before running the model.
 ```bash
 pip install pandas numpy matplotlib seaborn scikit-learn
 ```
@@ -50,30 +46,30 @@ Download `petrol_prices_pakistan_2010_2025.csv` and place it in the `data/` fold
 
 | Model | RMSE | R² |
 |---|---|---|
-| Linear Regression | - | - |
-| Ridge | - | - |
-| Lasso | - | - |
-| **Random Forest** | **-** | **-** |
+| Linear Regression | 18.19 | 0.2779 |
+| Ridge | 18.35 | 0.2655 |
+| **Lasso** | **18.10** | **0.2852** |
+| Random Forest | 117.82 | -29.2786 |
 
 ---
 
 ## Key Findings
 
-- **Lag_1** dominates — last month's price is the strongest predictor by far
+- **Lag_1** dominates — accounts for ~74% of feature importance in Random Forest
 - Prices surged dramatically in **2022** due to PKR devaluation and removal of government subsidies
-- Random Forest captures non-linear price shocks better than linear models
+- **Lasso** achieves the best performance — L1 regularization handles the high collinearity between lag features effectively
+- Random Forest severely overfits on this small dataset (180 rows) — linear models generalize better
 
 ---
 
 ## How to Run
 ```bash
-pip install -r requirements.txt
 python model.py
 ```
 
 ---
 
-## Results
+## Visualizations
 
 ![Price Trend](price_trend.png)
 ![Actual vs Predicted](actual_vs_predicted.png)
